@@ -1,0 +1,24 @@
+<footer class="entry-meta">
+    <p class="ingress">
+        <span class="{{ article.category }}">
+            {{ article.category | upper }} {{ article.theme }}</span>
+        <time class="p-date" datetime="{{ article.date.isoformat() }}">
+            {{ article.locale_date }}
+        </time>
+        {{ article.summary }}
+        <p class="author {{ article.category }}">text: {{ article.author | upper }}
+        </p>
+        <div class="ssba">
+            <a class="ssba_twitter_share" href="http://twitter.com/share?url=http://tidskriftenmana.se/&amp;text=Abortmotst%C3%A5ndare+p%C3%A5+frammarsch+i+krisens+Spanien+" target="_blank">
+                <img src="/{{ THEME_STATIC_DIR }}/images/sharing/twitter.png" title="Twitter" class="ssba" alt="Tweet about this on Twitter">
+            </a>
+            <a class="ssba_facebook_share" href="http://www.facebook.com/sharer.php?u={{ article.url }}" target="_blank">
+                <img src="/{{ THEME_STATIC_DIR }}/images/sharing/facebook.png" title="Facebook" class="ssba" alt="Share on Facebook">
+            </a>
+            <a class="ssba_email_share" href="mailto:?Subject={{ article.title }}&amp;Body={{ article.url }}">
+                <img src="/{{ THEME_STATIC_DIR }}/images/sharing/email.png" title="Email" class="ssba" alt="Email this to someone">
+            </a>
+        </div>
+    </p>
+
+</footer>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="{{ DEFAULT_LANG }}">
+<head>
+        <meta charset="utf-8" />
+        <title>{% block title %}{{ SITENAME }}{%endblock%}</title>
+        <link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/{{ CSS_FILE }}" />
+        {% if FEED_ALL_ATOM %}
+        <link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Atom Feed" />
+        {% endif %}
+        {% if FEED_ALL_RSS %}
+        <link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" />
+        {% endif %}
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body class="home page page-id-50 page-template page-template-themestart-php">
+    {% include 'github.html' %}
+    <div id="page" class="hfeed site">
+        <header id="masthead" class="site-header" role="banner">
+        <div class="site-branding {% block brandingcolor %}{% endblock %}" >
+            <!--<h1 class="site-title"><a href="/web/20150120172747/http://tidskriftenmana.se/" rel="home">MANA</a></h1>-->
+            <div class="mana-logo"><a href="{{ SITEURL }}" rel="home"><img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/mana.svg"></a></div>
+                <h2 class="site-description">ANTIRASISTISK TIDSKRIFT</h2>
+                <div class="right-extra">
+                <div class="header-link">
+                    <ul>
+                        {% if DISPLAY_PAGES_ON_MENU -%}
+                        {% for pg in PAGES %}
+                            <li{% if pg == page %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ pg.url }}">{{ pg.title }}</a></li>
+                        {% endfor %}
+                        {% endif %}
+                        <!-- <li><a href="index.php?page_id=91/#Om Mana">Om Mana</a></li>
+                        <li><a href="index.php?page_id=91/#Tidigare nummer">Tidigare nummer</a></li>
+                        <li><a href="index.php?page_id=91/#Köp i handeln">Köp i handeln</a></li>
+                        <li><a href="index.php?page_id=91/#Prenumerera på Mana">Prenumerera på Mana</a></li>
+                        <li><a href="index.php?page_id=91/#Kontakta oss">Kontakta oss</a></li> -->
+                    </ul>
+                </div>
+                <div class="search_form">
+                    <form role="search" method="get" class="search-form" action="http://tidskriftenmana.se/">
+                <label>
+                    <span class="screen-reader-text">Sök efter:</span>
+                    <input type="search" class="search-field" placeholder="Sök …" value="" name="s" title="Sök efter:">
+                </label>
+                <input type="submit" class="search-submit" value="Sök">
+            </form>             </div>
+            </div>
+            <div class="senste-nummer">
+                <a href="tema"><img src="{{ STATIC }}http://tidskriftenmana.se/wp-content/uploads/1-2014_500px.jpg"></a>
+                <p></p>
+            </div>
+        </div>
+        <nav id="site-navigation" class="main-navigation" role="navigation">
+            <h1 class="menu-toggle">Menu</h1>
+            <a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+            <div class="menu">
+                <ul class=" nav-menu">
+                    {% if DISPLAY_CATEGORIES_ON_MENU -%}
+                    {% for cat, null in categories %}
+                        <li{% if cat == category %} class="active {{ cat }}" {% else %} class="{{ cat }}"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
+                    {% endfor %}
+                    {% endif %}
+                    <!-- <li class="current_page_item"><a href="/web/20150120172747/http://tidskriftenmana.se/">Hem</a></li>
+                    <li class="page_item page-item-23"><a href="http://tidskriftenmana.se/tema/">TEMAN</a></li>
+                    <li class="page_item page-item-14"><a href="/web/20150120172747/http://tidskriftenmana.se/inrikes/">INRIKES</a></li>
+                    <li class="page_item page-item-16"><a href="/web/20150120172747/http://tidskriftenmana.se/utrikes/">UTRIKES</a></li>
+                    <li class="page_item page-item-18"><a href="/web/20150120172747/http://tidskriftenmana.se/kultur/">KULTUR</a></li><li class="page_item page-item-20"><a href="/web/20150120172747/http://tidskriftenmana.se/blogg/">BLOGG</a></li> -->
+                </ul>
+            </div>
+        </nav><!-- #site-navigation -->
+    </header>
+    <div class="scrollToTop" style="display: none;"></div>
+        <div id="content" class="site-content">
+            <div id="primary" class="content-area">
+                <main id="main" class="site-main" role="main">
+                    {% if category or tag %}
+                    <div class="recent-links">
+                        <ul class="category_links sticky_processed sticky-inactive">
+                            <p>Senast publicerat</p>
+                            {% for article in articles %}
+                                <li><a href="{{ article.url }}">{{ article.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                    {% block content %}
+                    {% endblock %}
+                </main>
+            </div>
+            <footer id="contentinfo" role="contentinfo">
+                <address id="about" class="vcard">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+            </footer>
+        </div>
+
+{% include 'analytics.html' %}
+{% include 'disqus_script.html' %}
+</body>
+</html>

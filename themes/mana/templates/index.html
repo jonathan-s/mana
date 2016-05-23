@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block content_title %}{% endblock %}
+{% block content %}
+
+{% if articles %}
+    {% for article in articles_page.object_list %}
+        {% if loop.first %}
+            <div class="container-art">
+            <section id="content" class="body">
+        {% endif %}
+        {% if article.category.slug != 'blogg' %}
+            <article>
+                {% include 'article_header.html' %}
+                <div class="entry-meta">
+                    {% include 'article_infos.html' %}
+                        {% include 'taglist.html' %}
+                        {% import 'translations.html' as translations with context %}
+                        {{ translations.translations_for(article) }}
+                </div>
+            </article>
+        {% endif %}
+        {% if category and category.slug == 'blogg' %}
+            <article>
+                {% include 'article_header.html' %}
+                <div class="entry-meta">
+                    {% include 'article_infos.html' %}
+                        {% include 'taglist.html' %}
+                        {% import 'translations.html' as translations with context %}
+                        {{ translations.translations_for(article) }}
+                </div>
+            </article>
+        {% endif %}
+
+        {% if loop.last %}
+            {% if loop.length > 1 or articles_page.has_other_pages() %}
+                {% if articles_page.has_other_pages() %}
+                    {% include 'pagination.html' %}
+                {% endif %}
+
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    </section><!-- /#content -->
+    </div> {# container-art #}
+{% endif %}
+
+{% if blog_articles %}
+    <div class="container-blogg {% if tag %}display-none{% endif %} {% if category %}display-none{% endif %}">
+        <div class="blogg-blurb">
+            <h1 id="entry-title">Manablogg</h1>
+            <p>På bloggen diskuterar vi rasism och antirasism i politiken, populärkulturen och i vår egen vardag. Bidra med dina tankar och erfrarenheter! Skriv till blogg@tidskriftenmana.se.</p>
+        </div>
+        <ul>
+        {% for article in blog_articles %}
+            <li>
+            {% include 'article_header.html' %}
+            {% include 'article_infos.html' %}
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+{% if PAGES %}
+<section id="content" class="body">
+<h2>Pages</h2>
+    {% for page in PAGES %}
+        <li><a href="{{ SITEURL }}/{{ page.url }}">{{ page.title }}</a></li>
+    {% endfor %}
+</section>
+{% endif %}
+{% endblock content %}

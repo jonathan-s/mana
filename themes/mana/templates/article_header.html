@@ -1,0 +1,7 @@
+<header class="entry-header">
+    {% if article.image %}
+    <img class="top_bild" src="/images/{{ article.image }}" alt="">
+    <p class="bild_text"><span>ILLUSTRATION: {{ article.image_byline }}</span></p>
+    {% endif %}
+    <a href="{{ SITEURL }}/{{ article.url }}" title="Link to {{ article.title | striptags }}"><h1 class="entry-title">{{ article.title }}</h1></a>
+</header>
