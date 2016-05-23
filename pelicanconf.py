@@ -10,7 +10,13 @@ SITEURL = ''
 THEME = 'mana'
 PATH = 'content'
 ARTICLE_PATH = ['tema']
-STATIC_PATHS = ['images', 'fonts']
+STATIC_PATHS = [
+    'images',
+    'static'
+]
+EXTRA_PATH_METADATA = {
+}
+
 PLUGINS = ['plugins.blogposts']
 
 TIMEZONE = 'Europe/Paris'
